@@ -39,6 +39,10 @@ emitJS is a combination of a pub/sub system and an event emitter.  Taking some o
   // => console message logged 'user has been created'
 ```
 
+## More Examples
+
+To see more examples please see the [Examples Page](https://github.com/jls/emitJS/wiki/Examples) in the wiki.
+
 ## Should I use Emitter or Binding?
 
 Short answer is whichever you want.  Both have their pros and cons and Miller Medeiros has a great write up here [comparison between different observer pattern implmentations](https://github.com/millermedeiros/js-signals/wiki/Comparison-between-different-Observer-Pattern-implementations).
