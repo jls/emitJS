@@ -122,7 +122,47 @@ For help deciding which implementation to use see Miller Medeiros's write up [co
   // => console message logged 'The First:Argument'
 ```
  
- 
+## Removing a listener (Binding)
+
+```javascript
+  // Create the binding
+  var theEvent = new emit.Binding();
+  
+  // Add a listener, keeping a reference to it.
+  var listener = theEvent.add(function(){console.log('event fired');});
+  
+  // Fire the event
+  theEvent.emit();
+  // => console message logged 'event fired'
+  
+  // Remove the listener.
+  theEvent.rem(listener);
+  
+  // Fire the event
+  theEvent.emit();
+  // => no console messages logged
+```
+
+## Removing a listener (Emitter)
+
+```
+  // Create the emitter
+  var emitter = new emit.EventEmitter();
+  
+  // Add a listener and keep a reference to it.
+  var listener = emitter.add('myEvent', function(){console.log('event fired');});
+  
+  // Emit the event.
+  emitter.emit('myEvent');
+  // => console message logged 'event fired'
+  
+  // Remove the listener
+  emitter.rem(listener);
+  
+  // Emit the event.
+  emitter.emit('myEvent');
+  // => no console messages logged
+```
  
  
  

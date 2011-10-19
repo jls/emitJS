@@ -95,8 +95,12 @@
     // @param {Function} listener The function to call when this binding is emitted.
     // @param {boolean} once True indicates this listener should only fire once, then be removed.
     // @param {Object} scope Context on which to execute the listener.
-    bindingInstance.add = bindingInstance.addListener = function(listener, once, scope){
-      _listeners.push(new emitterNS.EventListener(null, listener, scope, once, bindingInstance.rem));
+    // @param {String} type Type passed directly to the EventListener. Unless this binding is being used by an emitter, it can be ignored.
+    // @return {EventListener} The newly created EventListener instance.
+    bindingInstance.add = bindingInstance.addListener = function(listener, once, scope, type){
+      var eventHandler = new emitterNS.EventListener(type, listener, scope, once, bindingInstance.rem);
+      _listeners.push(eventHandler);
+      return eventHandler;
     };
     
     // Removes a listener from this binding.
@@ -167,7 +171,7 @@
     emitterInstance.add = emitterInstance.addListener = function(type, listener, once, scope){
       if(!_bindings[type])
         _bindings[type] = new emitterNS.Binding();
-      _bindings[type].add(listener, once, scope);
+      return _bindings[type].add(listener, once, scope, type);
     };
 
 

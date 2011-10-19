@@ -98,6 +98,21 @@
       
     });
 
+    test("listener correctly removed", function(){
+      var c = 0;
+      var b = new emit.Binding();
+      var l = b.add(function(){
+        c += 1;
+      });
+      
+      b.emit();
+      equal(c, 1, 'count incremented after first emit');
+      b.rem(l);
+      b.emit();
+      equal(c, 1, 'count should not be incremented after listener removed');
+      
+    });
+
     //
     // emit.EventEmitter
     //
@@ -151,6 +166,29 @@
       
     });
 
+    test("event listener type should be set correctly by emitter", function(){
+      
+      var e = new emit.EventEmitter();
+      var l = e.add('t', emptyFunction);
+      equal(l.type, 't', 'listeners type should match type supplied to emitter');
+      
+    });
+
+    test("listener should be correctly removed", function(){
+      
+      var c = 0;
+      var e = new emit.EventEmitter();
+      var l = e.add('t', function(){
+        c += 1;
+      });
+      
+      e.emit('t');
+      equal(c, 1, 'count should be incremented after first emit');
+      e.rem(l);
+      e.emit('t');
+      equal(c, 1, 'count should not be incremented after second emit');
+      
+    });
     
   });
   </script>
