@@ -90,3 +90,41 @@ For help deciding which implementation to use see Miller Medeiros's write up [co
 
 ```
   
+## Passing arguments to a listener
+
+```javascript
+  // Using the binding implementation, create bindings.
+  var theEvent = new emit.Binding();
+  
+  // Add a listener that accepts arguments
+  theEvent.add(function(a, b){
+    console.log(a + ':' + b);
+  });
+  
+  // Fire the event passing arguments
+  theEvent.emit('The First', 'Argument');
+  // => console message logged 'The First:Argument'
+```
+
+## Passing arguments to a listener (Emitter)
+
+```javascript
+  // Using emitter implementation, create emitter
+  var emitter = new emit.EventEmitter();
+  
+  // Add a listener that accepts arguments
+  emitter.add('myEvent', function(a, b){
+    console.log(a + ':' + b);
+  });
+ 
+  // Emit the event, passing arguments
+  emitter.emit('myEvent', 'The First', 'Argument');
+  // => console message logged 'The First:Argument'
+```
+ 
+ 
+ 
+ 
+ 
+ 
+  

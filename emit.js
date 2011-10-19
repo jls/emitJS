@@ -164,7 +164,7 @@
     // @param {Function} listener The function that will be executed when the event type is emitted.
     // @param {Object} [scope] Context on which to call the listener
     // @param {boolean} [once=false] True indicates that the listener should only be called once, then removed.
-    emitterInstance.add = emitterInstance.addListener = function(type, listener, scope, once){
+    emitterInstance.add = emitterInstance.addListener = function(type, listener, once, scope){
       if(!_bindings[type])
         _bindings[type] = new emitterNS.Binding();
       _bindings[type].add(listener, once, scope);
