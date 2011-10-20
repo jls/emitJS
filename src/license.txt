@@ -1,0 +1,5 @@
+/*!!
+ * emitJS <http://github.com/jls/emitJS>
+ * Released under the MIT license <http://www.opensource.org/licenses/mit-license.php>
+ * @author James Smith <http://thejls.com>
+ */
