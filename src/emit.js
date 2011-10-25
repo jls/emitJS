@@ -58,6 +58,12 @@
     eventInstance.once = once;
     
     /**
+    * Flag indicating whether the listener is currently active.
+    * @type boolean
+    */
+    eventInstance.active = true;
+    
+    /**
     * Callback executed when the event listener should be 
     * removed from any bindings it is currently attached to.
     * @type Function
@@ -70,7 +76,8 @@
     * @return {*} The value returned from the listener.
     */
     eventInstance.fire = function(args){
-
+      if(!eventInstance.active) return;
+      
       var ret = eventInstance.listener.apply(eventInstance.scope || this, args || []);      
       if(eventInstance.once){
         eventInstance.removeCallback(eventInstance);
@@ -147,20 +154,14 @@
     };
     
   };
-  
-  /**
-  * @return {Number} Number of listeners currently bound to this binding.
-  */
-  emitterNS.Binding.prototype.length = function(){this.listeners.length;};
-  
+    
   /**
   * Object that represents a emitter.  It can contain multiple bindings differentiated
   * by a type string.  Listeners can be added for different type strings
   * and events can be fired for each type string.
   * @constructor
   */
-  function EventEmitter(){
-  //var EventEmitter = function(){
+  emitterNS.EventEmitter = function(){
 
     var emitterInstance = this;
     
@@ -220,9 +221,5 @@
     };
     
   };
-  
-  // Add the EventEmitter object to our global namespace.
-  emitterNS.EventEmitter = EventEmitter;
-  
   
 })(window);

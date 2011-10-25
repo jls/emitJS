@@ -46,6 +46,25 @@ $(document).ready(function(){
     e.fire(['5']);
   });
 
+  test("inactive listeners do not fire", function(){
+    var c = 0;
+    var h = function(){c += 1;}
+    
+    var listener = new emit.EventListener('t', h);
+    
+    listener.fire();
+    equal(c, 1, 'listener fired by default');
+    
+    listener.active = false;
+    listener.fire();
+    equal(c, 1, 'listener not fired while inactive');
+    
+    listener.active = true;
+    listener.fire();
+    equal(c, 2, 'listener fired when reactivated');
+    
+  })
+
   //
   // emit.Binding
   //
