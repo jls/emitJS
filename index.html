@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="emitJS : JavaScript event system that includes both a Pub/Sub and Emitter implementation." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>emitJS</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jls/emitJS">View on GitHub</a>
+
+          <h1 id="project_title">emitJS</h1>
+          <h2 id="project_tagline">JavaScript event system that includes both a Pub/Sub and Emitter implementation.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jls/emitJS/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jls/emitJS/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Overview</h2>
+
+<p>emitJS is a combination of a pub/sub system and an event emitter.  Taking some of the best parts of <a href="https://github.com/millermedeiros/js-signals">js-signals</a> and the simplicity of <a href="https://github.com/Wolfy87/EventEmitter">EventEmitter</a> and combining them so either (or both) pattern implementation can be used.</p>
+
+<h2>Simple Emitter Example</h2>
+
+<div class="highlight">
+<pre>  <span class="c1">// Create an emitter.</span>
+  <span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">emit</span><span class="p">.</span><span class="nx">EventEmitter</span><span class="p">();</span>
+
+  <span class="c1">// Add a listener to the emitter.</span>
+  <span class="nx">emitter</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'userCreated'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'user has been created'</span><span class="p">);});</span>
+
+  <span class="c1">// Add another listener to the emitter.</span>
+  <span class="nx">emitter</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'userCreated'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span><span class="nx">alert</span><span class="p">(</span><span class="s1">'user has been created'</span><span class="p">);});</span>
+
+  <span class="c1">// Emit the event</span>
+  <span class="nx">emitter</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'userCreated'</span><span class="p">);</span>
+  <span class="c1">// =&gt; Alert shown displaying 'user has been created';</span>
+  <span class="c1">// =&gt; console message logged 'user has been created';</span>
+</pre>
+</div>
+
+
+<h2>Simple Binding Example</h2>
+
+<div class="highlight">
+<pre>  <span class="c1">// Create the event bindings.</span>
+  <span class="kd">var</span> <span class="nx">my</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">events</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">userCreated</span><span class="o">:</span> <span class="k">new</span> <span class="nx">emit</span><span class="p">.</span><span class="nx">Binding</span><span class="p">(),</span>
+      <span class="nx">userRemoved</span><span class="o">:</span> <span class="k">new</span> <span class="nx">emit</span><span class="p">.</span><span class="nx">Binding</span><span class="p">()</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Add a listener to the userCreated binding.</span>
+  <span class="nx">my</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">userCreated</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'user has been created'</span><span class="p">);});</span>
+
+  <span class="c1">// Emit the userCreated event.</span>
+  <span class="nx">my</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">userCreated</span><span class="p">.</span><span class="nx">emit</span><span class="p">();</span>
+  <span class="c1">// =&gt; console message logged 'user has been created'</span>
+</pre>
+</div>
+
+
+<h2>More Examples</h2>
+
+<p>To see more examples please see the <a href="https://github.com/jls/emitJS/wiki/Examples">Examples Page</a> in the wiki.</p>
+
+<h2>Should I use Emitter or Binding?</h2>
+
+<p>Short answer is whichever you want.  Both have their pros and cons and Miller Medeiros has a great write up here <a href="https://github.com/millermedeiros/js-signals/wiki/Comparison-between-different-Observer-Pattern-implementations">comparison between different observer pattern implmentations</a>.</p>
+
+<p>I tend to prefer the binding implementation just because it works well with auto complete and my tests will complain when I try and emit or subscribe to the wrong event. </p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">emitJS maintained by <a href="https://github.com/jls">jls</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
